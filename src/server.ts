@@ -41,6 +41,20 @@ app.get("/stats/:id", async (req, res) => {
     };
   res.status(200).json(result);
 });
+
+// POST register
+// BODY { id: string }
+// Return 200 if the id is registered and 400 if it is already registered
+app.post("/register", async (req, res) => {
+  const id = req.body.id;
+  const data = await getData("stats", id);
+  if (data) {
+    res.status(400).json({ message: `${id} is already registered` });
+    return;
+  }
+  await addData("stats", id, {});
+  res.status(200).json({ message: `${id} is registered` });
+});
 // Rerturn 404 for all other routes
 app.all("*", (_req, res) => {
   res.status(404).json({ message: "No ressource here" });
