@@ -1,5 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
+import { getData } from "./database/getData.js";
+import { addData } from "./database/addData.js";
+import { updateData } from "./database/updateData.js";
 
 // DOTENV stuff
 import { config } from "dotenv";
